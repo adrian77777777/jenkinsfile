@@ -8,13 +8,14 @@ pipeline {
                          }
         stage('Build') {
                     steps {
-                        sh 'make'
-                        archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+                        /*sh 'make'
+                        archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true*/
                            }
                         }
         stage('Test') {
                     steps {
-                        echo 'Testing..'
+                        sh 'make check || true'
+                        junit '**/target/*.xml'
                             }
                        }
         stage('Deploy') {
